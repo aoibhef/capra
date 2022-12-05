@@ -1,2 +1,2 @@
 # capra
-Experimental event-based graphics engine
+Experimental, event-based graphics engine
