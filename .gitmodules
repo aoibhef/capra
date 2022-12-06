@@ -1,0 +1,6 @@
+[submodule "external/spdlog"]
+	path = external/spdlog
+	url = ../../gabime/spdlog.git
+[submodule "external/fmt"]
+	path = external/fmt
+	url = ../../fmtlib/fmt.git
