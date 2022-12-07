@@ -12,23 +12,14 @@ else()
     set(CMAKE_CXX_STANDARD 20)
 endif()
 
-add_library(capra STATIC
-        include/capra/capra.hpp
-        src/capra/capra.cpp)
+include(include/CMakeLists.txt)
+include(src/CMakeLists.txt)
+add_library(capra STATIC ${CAPRA_INCLUDE_FILES} ${CAPRA_SRC_FILES})
 
-add_subdirectory(external/fmt)
+target_include_directories(capra PUBLIC include)
 
-set(SPDLOG_BUILD_EXAMPLE OFF CACHE BOOL "" FORCE)
-set(SPDLOG_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-set(SPDLOG_FMT_EXTERNAL ON CACHE BOOL "" FORCE)
-add_subdirectory(external/spdlog)
-
-target_include_directories(capra PUBLIC
-        include)
-
-target_link_libraries(capra PUBLIC
-        fmt::fmt
-        spdlog::spdlog)   
+include(external/CMakeLists.txt)
+target_link_libraries(capra PUBLIC capra_externals)
 
 if(CAPRA_BUILD_EXAMPLES)
     add_subdirectory(examples)
