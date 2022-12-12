@@ -76,5 +76,5 @@ target_link_libraries(capra_externals INTERFACE
         glm::glm
         libnyquist
         OpenAL::OpenAL
-        spdlog::spdlog
+        spdlog::spdlog_header_only
         stduuid)

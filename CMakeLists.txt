@@ -3,6 +3,7 @@ project(capra VERSION 0.1
         DESCRIPTION "WIP"
         LANGUAGES CXX C)
 
+set(CAPRA_SPDLOG_LEVEL "SPDLOG_LEVEL_DEBUG" CACHE STRING "spdlog log level")
 option(CAPRA_BUILD_EXAMPLES "Build example programs" ON)
 
 if(MSVC)
@@ -15,6 +16,10 @@ endif()
 include(include/CMakeLists.txt)
 include(src/CMakeLists.txt)
 add_library(capra STATIC ${CAPRA_INCLUDE_FILES} ${CAPRA_SRC_FILES})
+
+target_compile_definitions(capra PUBLIC
+        IMGUI_USER_CONFIG="capra/capra_imconfig.hpp"
+        SPDLOG_ACTIVE_LEVEL=${CAPRA_SPDLOG_LEVEL})
 
 target_include_directories(capra PUBLIC include)
 

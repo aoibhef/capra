@@ -1,5 +1,7 @@
 #include "capra/util/rnd.hpp"
 
+#include "capra/util/log.hpp"
+
 namespace rnd {
 
 void gen_seed_vals() {
@@ -56,24 +58,22 @@ void debug_show_seed() {
   internal::generator();  // Make sure generator has been invoked before
 
   if (std::uint64_t(seed_info().seed >> 64) == 0 && std::uint64_t(seed_info().stream >> 64) == 0) {
-// FIXME
-//    YAGI_LOG_DEBUG(
-//        "Seed statement: rnd::seed({:#x}, {:#x});",
-//        std::uint64_t(seed_info().seed),
-//        std::uint64_t(seed_info().stream)
-//    );
+    CAPRA_LOG_DEBUG(
+        "Seed statement: rnd::seed({:#x}, {:#x});",
+        std::uint64_t(seed_info().seed),
+        std::uint64_t(seed_info().stream)
+    );
 
   } else {
     auto seed_hi = std::uint64_t(seed_info().seed >> 64);
     auto seed_lo = std::uint64_t(seed_info().seed);
     auto stream_hi = std::uint64_t(seed_info().stream >> 64);
     auto stream_lo = std::uint64_t(seed_info().stream);
-// FIXME
-//    YAGI_LOG_DEBUG(
-//        "Seed statement: rnd::seed128({:#x}, {:#x}, {:#x}, {:#x});",
-//        seed_hi, seed_lo,
-//        stream_hi, stream_lo
-//    );
+    CAPRA_LOG_DEBUG(
+        "Seed statement: rnd::seed128({:#x}, {:#x}, {:#x}, {:#x});",
+        seed_hi, seed_lo,
+        stream_hi, stream_lo
+    );
   }
 }
 
