@@ -1,5 +1,7 @@
 #pragma once
 
+#include "capra/core/engine.hpp"
+
 #include "capra/util/noise/perlin.hpp"
 #include "capra/util/averagers.hpp"
 #include "capra/util/log.hpp"

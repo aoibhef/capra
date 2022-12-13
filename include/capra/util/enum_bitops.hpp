@@ -5,7 +5,7 @@
 #define ENABLE_BITOPS(x)              \
   template<> struct EnableBitops<x> { \
     static const bool enable = true;  \
-  };
+  }
 
 template<typename Enum>
 struct EnableBitops {
