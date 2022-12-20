@@ -1,6 +1,7 @@
 #pragma once
 
 #include "capra/core/module/module.hpp"
+#include "capra/core/module/inputmgr.hpp"
 #include "capra/core/module/window.hpp"
 #include <memory>
 
@@ -8,6 +9,7 @@ namespace capra {
 
 class Application : public Module {
 public:
+  std::shared_ptr<InputMgr> input{nullptr};
   std::shared_ptr<Window> window{nullptr};
 
   explicit Application(const Engine &engine);

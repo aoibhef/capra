@@ -1,6 +1,7 @@
 #pragma once
 
 #include "capra/core/module/application.hpp"
+#include "capra/core/module/inputmgr.hpp"
 #include "capra/core/module/module.hpp"
 #include "capra/core/module/window.hpp"
 #include <memory>
@@ -50,6 +51,7 @@ std::shared_ptr<T> Engine::get_module(ModuleTag tag) const {
 template<class T> requires std::derived_from<T, Application>
 void Engine::run() {
   add_module<Window>(ModuleTag::Window);
+  add_module<InputMgr>(ModuleTag::InputMgr);
   add_module<T>(ModuleTag::Application);
 
   MsgBus::send_nowait<MsgType::Initialize>();
@@ -63,6 +65,7 @@ void Engine::run() {
 
     for (const auto tag : module_poll_prio_)
       modules_[tag]->poll_msgs();
+    MsgBus::poll(msg_endpoint_id_);
 
     glfwPollEvents();
   } while (!received_shutdown_);

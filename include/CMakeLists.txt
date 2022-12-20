@@ -1,5 +1,6 @@
 set(CAPRA_INCLUDE_FILES ${CAPRA_INCLUDE_FILES}
         include/capra/core/module/application.hpp
+        include/capra/core/module/inputmgr.hpp
         include/capra/core/module/module.hpp
         include/capra/core/module/window.hpp
         include/capra/core/engine.hpp

@@ -8,6 +8,7 @@ namespace capra::internal {
 void register_glfw_callbacks(GLFWwindow *window) {
   glfwSetErrorCallback(error_callback);
 
+  glfwSetWindowCloseCallback(window, window_close_callback);
   glfwSetWindowSizeCallback(window, window_size_callback);
   glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
   glfwSetWindowContentScaleCallback(window, window_content_scale_callback);
@@ -33,6 +34,10 @@ void register_glfw_callbacks(GLFWwindow *window) {
 
 void error_callback(int code, const char *description) {
   CAPRA_LOG_ERROR("GLFW ({}): {}", code, description);
+}
+
+void window_close_callback(GLFWwindow *window) {
+  MsgBus::send_nowait<MsgType::GlfwWindowClose>(window);
 }
 
 void window_size_callback(GLFWwindow *window, int width, int height) {

@@ -1,5 +1,6 @@
 set(CAPRA_SRC_FILES ${CAPRA_SRC_FILES}
         src/capra/core/module/application.cpp
+        src/capra/core/module/inputmgr.cpp
         src/capra/core/module/module.cpp
         src/capra/core/module/window.cpp
         src/capra/core/engine.cpp

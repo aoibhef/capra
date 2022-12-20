@@ -9,6 +9,7 @@ class Engine;
 
 enum class ModuleTag {
   Application,
+  InputMgr,
   Window
 };
 

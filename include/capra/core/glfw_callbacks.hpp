@@ -9,6 +9,8 @@ void register_glfw_callbacks(GLFWwindow *window);
 
 void error_callback(int code, const char *description);
 
+void window_close_callback(GLFWwindow *window);
+
 void window_size_callback(GLFWwindow *window, int width, int height);
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);

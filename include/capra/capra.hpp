@@ -12,3 +12,8 @@
 
 #include "fmt/format.h"
 #include "fmt/ranges.h"
+
+#define CAPRA_RUN(application)          \
+  int main(int, char *[]) {             \
+    capra::Engine().run<application>(); \
+  }
