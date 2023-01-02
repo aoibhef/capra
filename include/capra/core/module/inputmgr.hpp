@@ -26,7 +26,7 @@ public:
     bool got_first_event{false};
   } mouse{};
 
-  explicit InputMgr(const Engine &engine);
+  InputMgr();
 
   void update(double dt);
 
@@ -59,6 +59,10 @@ private:
   std::string glfw_key_to_str_(int key);
   std::string glfw_button_to_str_(int button);
   const std::unordered_set<std::string> &all_actions_();
+};
+
+template<> struct ModuleInfo<ModuleTag::InputMgr> {
+  const static std::vector<ModuleTag> dependencies;
 };
 
 } // namespace capra

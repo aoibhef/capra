@@ -7,7 +7,9 @@
 
 namespace capra {
 
-Window::Window(const Engine &engine) : Module(engine, ModuleTag::Window) {
+const std::vector<ModuleTag> ModuleInfo<ModuleTag::Window>::dependencies = {};
+
+Window::Window() : Module(ModuleTag::Window) {
   MsgBus::subscribe(msg_endpoint_id_, MsgType::GlfwWindowPos);
   MsgBus::subscribe(msg_endpoint_id_, MsgType::GlfwWindowClose);
 }
@@ -87,7 +89,7 @@ void Window::swap() const {
 void Window::received_msg_(const Msg &msg) {
   std::visit(overloaded {
       [&](const GlfwWindowClose &) { MsgBus::send<MsgType::Shutdown>(); },
-      [&](const auto &e) { CAPRA_LOG_WARN("Engine received unhandled event: {}", msg.type); }
+      [&](const auto &e) { CAPRA_LOG_WARN("Window received unhandled event: {}", msg.type); }
   }, msg.data);
 }
 

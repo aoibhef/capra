@@ -46,7 +46,7 @@ public:
 
   GLFWwindow *glfw_handle{nullptr};
 
-  explicit Window(const Engine &engine);
+  Window();
 
   void open(const WindowOpenParams &params);
 //  std::unique_ptr<Context> create_ctx();
@@ -76,6 +76,10 @@ private:
   GLFWmonitor *get_monitor_(int monitor_num);
   void open_fullscreen_(const WindowOpenParams &params);
   void open_windowed_(const WindowOpenParams &params);
+};
+
+template<> struct ModuleInfo<ModuleTag::Window> {
+  const static std::vector<ModuleTag> dependencies;
 };
 
 } // namespace capra

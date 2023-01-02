@@ -6,10 +6,9 @@
 
 namespace capra {
 
-Application::Application(const Engine &engine) : Module(engine, ModuleTag::Application) {
-  input = engine.get_module<InputMgr>(ModuleTag::InputMgr);
-  window = engine.get_module<Window>(ModuleTag::Window);
+const std::vector<ModuleTag> ModuleInfo<ModuleTag::Application>::dependencies = {ModuleTag::InputMgr, ModuleTag::Window};
 
+Application::Application() : Module(ModuleTag::Application) {
   MsgBus::subscribe(msg_endpoint_id_, MsgType::Initialize);
   MsgBus::subscribe(msg_endpoint_id_, MsgType::Update);
   MsgBus::subscribe(msg_endpoint_id_, MsgType::StartFrame);
@@ -21,6 +20,13 @@ void Application::deinitialize() {}
 void Application::update(double dt) {}
 void Application::draw() {}
 
+void Application::initialize_dependencies_(std::shared_ptr<Engine> engine) {
+  Module::initialize_dependencies_(engine);
+
+  input = engine->get_module<InputMgr>(ModuleTag::InputMgr);
+  window = engine->get_module<Window>(ModuleTag::Window);
+}
+
 void Application::received_msg_(const Msg &msg) {
   std::visit(overloaded {
       [&](const Initialize &) { initialize(); },
@@ -30,7 +36,7 @@ void Application::received_msg_(const Msg &msg) {
       },
       [&](const StartFrame &) { },
       [&](const EndFrame &) { window->swap(); },
-      [&](const auto &e) { CAPRA_LOG_WARN("Engine received unhandled event: {}", msg.type); }
+      [&](const auto &e) { CAPRA_LOG_WARN("Application received unhandled event: {}", msg.type); }
   }, msg.data);
 }
 

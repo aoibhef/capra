@@ -11,9 +11,9 @@ namespace capra {
 
 class FrameCounter {
 public:
-  FrameCounter();
+  FrameCounter(double interval = 0.0);
 
-  void update();
+  std::uint64_t update();
 
   double fps() const;
   double dt() const;
@@ -21,10 +21,11 @@ public:
   std::vector<double> dts_vec() const;
 
 private:
-  std::uint64_t start_time_{};
+  std::uint64_t start_time_;
   std::deque<std::uint64_t> timestamps_{};
   std::deque<double> dts_{};
 
+  Ticker user_ticker_;
   Ticker ticker_{0.5};
   EMA averager_{1.0};
 };

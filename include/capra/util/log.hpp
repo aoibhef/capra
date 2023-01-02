@@ -4,6 +4,7 @@
 #if !defined(SPDLOG_ACTIVE_LEVEL)
 #define SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_INFO
 #endif
+#include "fmt/ranges.h"  // Allow logging ranges (vector, etc.)
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/ansicolor_sink.h"
 #include <memory>

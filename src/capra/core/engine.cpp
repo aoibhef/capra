@@ -30,4 +30,36 @@ void Engine::received_msg_(const Msg &msg) {
   }, msg.data);
 }
 
+void Engine::resolve_module_dependencies_() {
+  std::unordered_set<ModuleTag> modules_to_initialize{};
+  for (const auto &m : module_dependencies_)
+    modules_to_initialize.insert(m.first);
+
+  std::vector<ModuleTag> resolution_order{};
+
+  while (!modules_to_initialize.empty()) {
+    for (auto it = modules_to_initialize.begin(); it != modules_to_initialize.end(); ) {
+      const auto &dependencies = module_dependencies_[*it];
+
+      bool all_resolved = true;
+      for (const auto &dep : dependencies)
+        if (std::find(resolution_order.begin(), resolution_order.end(), dep) == resolution_order.end()) {
+          all_resolved = false;
+          break;
+        }
+
+      if (all_resolved) {
+        resolution_order.emplace_back(*it);
+        it = modules_to_initialize.erase(it);
+      } else
+        it++;
+    }
+  }
+
+  CAPRA_LOG_DEBUG("Module dependency resolution order: {}", resolution_order);
+
+  for (const auto &tag : resolution_order)
+    modules_[tag]->initialize_dependencies_(shared_from_this());
+}
+
 } // namespace capra

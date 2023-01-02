@@ -12,7 +12,7 @@ public:
   std::shared_ptr<InputMgr> input{nullptr};
   std::shared_ptr<Window> window{nullptr};
 
-  explicit Application(const Engine &engine);
+  explicit Application();
 
   virtual void initialize();
   virtual void deinitialize();
@@ -21,6 +21,11 @@ public:
 
 private:
   void received_msg_(const Msg &msg) override;
+  void initialize_dependencies_(std::shared_ptr<Engine> engine) override;
+};
+
+template<> struct ModuleInfo<ModuleTag::Application> {
+  const static std::vector<ModuleTag> dependencies;
 };
 
 } // namespace capra

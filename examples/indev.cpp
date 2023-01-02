@@ -1,9 +1,8 @@
+#define CAPRA_PRINT_HELPERS
 #include "capra/capra.hpp"
 
 class Indev : public capra::Application {
 public:
-  explicit Indev(capra::Engine &engine) : Application(engine) {}
-
   void initialize() override {
     window->open({
         .title = "Indev",
@@ -15,9 +14,8 @@ public:
   void deinitialize() override {}
 
   void update(double dt) override {
-    if (input->pressed("a")) {
-      fmt::print("You pressed A!\n");
-      std::fflush(stdout);
+    if (input->down("a", 0.5)) {
+      capra::fprintln("You pressed A!");
     }
   }
 

@@ -4,7 +4,9 @@
 
 namespace capra {
 
-InputMgr::InputMgr(const Engine &engine) : Module(engine, ModuleTag::InputMgr) {
+const std::vector<ModuleTag> ModuleInfo<ModuleTag::InputMgr>::dependencies = {};
+
+InputMgr::InputMgr() : Module(ModuleTag::InputMgr) {
   MsgBus::subscribe(msg_endpoint_id_, MsgType::GlfwKey);
   MsgBus::subscribe(msg_endpoint_id_, MsgType::GlfwCursorPos);
   MsgBus::subscribe(msg_endpoint_id_, MsgType::GlfwCursorEnter);
@@ -83,14 +85,14 @@ bool InputMgr::down(const std::string &binding, double interval, double delay) {
   if (bindings_.contains(binding)) {
     const auto action = bindings_[binding];
 
-    if (interval <= 0.0 && delay <= 0.0)
+    if (interval <= 0.0 && delay <= 0.0) {
       return state_[action];
 
-    else if (repeat_state_.contains(action)) {
+    } else if (repeat_state_.contains(action)) {
       return repeat_state_[action].pressed;
 
     } else if (state_[action]) {
-      if (delay >= 0.0) {
+      if (delay > 0.0) {
         repeat_state_[action] = Repeat{
             .time = interval,
             .interval = interval,
@@ -162,7 +164,7 @@ void InputMgr::received_msg_(const Msg &msg) {
         mouse.sy += e.yoffset;
       },
 
-      [&](const auto &) { CAPRA_LOG_WARN("Unhandled event {}", msg.type); }
+      [&](const auto &) { CAPRA_LOG_WARN("InputMgr received unhandled event {}", msg.type); }
   }, msg.data);
 }
 

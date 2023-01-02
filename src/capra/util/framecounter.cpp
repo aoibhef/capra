@@ -2,11 +2,12 @@
 
 namespace capra {
 
-FrameCounter::FrameCounter() {
+FrameCounter::FrameCounter(double interval) {
   start_time_ = time_nsec();
+  user_ticker_ = Ticker(interval);
 }
 
-void FrameCounter::update() {
+std::uint64_t FrameCounter::update() {
   timestamps_.emplace_back(time_nsec());
   if (timestamps_.size() == 1)
     dts_.emplace_back(static_cast<double>(timestamps_.back() - start_time_) / 1e9);
@@ -22,6 +23,8 @@ void FrameCounter::update() {
   averager_.update(static_cast<double>(timestamps_.size()));
   if (ticker_.tick())
     averager_.alpha = 2.0 / (1.0 + static_cast<double>(timestamps_.size()));
+
+  return user_ticker_.tick();
 }
 
 double FrameCounter::fps() const {
