@@ -1,4 +1,4 @@
-add_library(capra_externals INTERFACE
+add_library(capra_externals STATIC
         external/glad/include/glad/gl.h
 
         external/imgui/backends/imgui_impl_glfw.h
@@ -63,14 +63,14 @@ add_subdirectory(external/spdlog)
 #set(UUID_SYSTEM_GENERATOR ON CACHE BOOL "" FORCE)
 add_subdirectory(external/stduuid)
 
-target_include_directories(capra_externals INTERFACE
+target_include_directories(capra_externals PUBLIC
         external/glad/include
         external/imgui/backends
         external/imgui
         external/implot
         external/pcg-cpp/include)
 
-target_link_libraries(capra_externals INTERFACE
+target_link_libraries(capra_externals PUBLIC
         fmt::fmt
         glfw
         glm::glm

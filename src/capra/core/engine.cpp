@@ -23,6 +23,13 @@ Engine::Engine() {
   MsgBus::subscribe(msg_endpoint_id_, MsgType::Shutdown);
 }
 
+void Engine::shutdown() {
+  // This could set the received_shutdown_ flag explicitly, but having a single
+  // exit point (the shutdown event) will make debugging easier if it ever breaks
+  // for some reason
+  MsgBus::send<MsgType::Shutdown>();
+}
+
 void Engine::received_msg_(const Msg &msg) {
   std::visit(overloaded {
     [&](const Shutdown &e) { received_shutdown_ = true; },

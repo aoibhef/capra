@@ -171,7 +171,7 @@ struct Msg {
 template<> struct fmt::formatter<capra::MsgType>: formatter<string_view> {
   template <typename FormatContext>
   auto format(capra::MsgType t, FormatContext& ctx) const {
-    #define STRINGIFY(e) case (e): name = #e; break;
+#define STRINGIFY(e) case (e): name = #e; break;
     string_view name = "capra::MsgType::?";
     switch (t) {
       using enum capra::MsgType;
@@ -202,4 +202,5 @@ template<> struct fmt::formatter<capra::MsgType>: formatter<string_view> {
     }
     return formatter<string_view>::format(name, ctx);
   }
+#undef STRINGIFY
 };

@@ -10,6 +10,7 @@ class Engine;
 
 enum class ModuleTag {
   Application,
+  GLContext,
   InputMgr,
   Window
 };
@@ -47,6 +48,7 @@ template<> struct fmt::formatter<capra::ModuleTag>: formatter<string_view> {
     switch (t) {
       using enum capra::ModuleTag;
       STRINGIFY(Application)
+      STRINGIFY(GLContext)
       STRINGIFY(InputMgr)
       STRINGIFY(Window)
     }

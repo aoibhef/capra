@@ -49,7 +49,7 @@ public:
   Window();
 
   void open(const WindowOpenParams &params);
-//  std::unique_ptr<Context> create_ctx();
+  WindowOpenParams get_open_params() const;
 
   void set_x(int xpos);
   void set_y(int ypos);
@@ -67,11 +67,9 @@ public:
   void swap() const;
 
 private:
-  void received_msg_(const Msg &msg) override;
+  WindowOpenParams open_params_{};
 
-  struct {
-    glm::ivec2 gl_version{};
-  } wm_info_;
+  void received_msg_(const Msg &msg) override;
 
   GLFWmonitor *get_monitor_(int monitor_num);
   void open_fullscreen_(const WindowOpenParams &params);

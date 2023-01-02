@@ -9,6 +9,8 @@ set(CAPRA_INCLUDE_FILES ${CAPRA_INCLUDE_FILES}
         include/capra/core/msg_data.hpp
         include/capra/core/msg_def.hxx
 
+        include/capra/gfx/color.hpp
+
         include/capra/util/noise/perlin.hpp
         include/capra/util/averagers.hpp
         include/capra/util/enum_bitops.hpp

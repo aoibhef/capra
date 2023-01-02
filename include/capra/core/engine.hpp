@@ -29,6 +29,8 @@ public:
   template<class T> requires std::derived_from<T, Application>
   void run();
 
+  void shutdown();
+
 private:
   std::string msg_endpoint_id_;
   std::unordered_map<ModuleTag, std::shared_ptr<Module>> modules_{};
@@ -59,8 +61,9 @@ template<class T> requires std::derived_from<T, Application>
 void Engine::run() {
   add_module<T, ModuleTag::Application>();
 
-  add_module<Window, ModuleTag::Window>();
+  add_module<GLContext, ModuleTag::GLContext>();
   add_module<InputMgr, ModuleTag::InputMgr>();
+  add_module<Window, ModuleTag::Window>();
 
   // Modules are not fully initialized,
   // dependencies must be resolved first
