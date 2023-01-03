@@ -1,4 +1,4 @@
-<img src="data/logo/large.png">
+<img src="data/logo/xlarge.png">
 
 Experimental, event-based graphics engine
 
