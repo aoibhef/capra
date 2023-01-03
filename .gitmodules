@@ -29,3 +29,7 @@
 [submodule "external/stduuid"]
 	path = external/stduuid
 	url = ../../mariusbancila/stduuid.git
+[submodule "external/glad"]
+	path = external/glad
+	url = ../../Dav1dde/glad.git
+	branch = glad2
