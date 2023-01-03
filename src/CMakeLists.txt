@@ -8,6 +8,11 @@ set(CAPRA_SRC_FILES ${CAPRA_SRC_FILES}
         src/capra/core/glfw_callbacks.cpp
         src/capra/core/msg_bus.cpp
 
+        src/capra/gfx/gl/buffer_base.cpp
+        src/capra/gfx/gl/framebuffer.cpp
+        src/capra/gfx/gl/shader.cpp
+        src/capra/gfx/gl/static_buffer.cpp
+        src/capra/gfx/gl/vertex_array.cpp
         src/capra/gfx/color.cpp
 
         src/capra/util/noise/perlin.cpp

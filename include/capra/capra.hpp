@@ -4,6 +4,7 @@
 
 #include "capra/util/noise/perlin.hpp"
 #include "capra/util/averagers.hpp"
+#include "capra/util/dear.hpp"
 #include "capra/util/log.hpp"
 #include "capra/util/platform.hpp"
 #include "capra/util/rnd.hpp"

@@ -24,6 +24,8 @@ public:
 private:
   void received_msg_(const Msg &msg) override;
   void initialize_dependencies_(std::shared_ptr<Engine> engine) override;
+
+  void draw_debug_overlay_();
 };
 
 template<> struct ModuleInfo<ModuleTag::Application> {

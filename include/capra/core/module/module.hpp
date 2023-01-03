@@ -54,4 +54,5 @@ template<> struct fmt::formatter<capra::ModuleTag>: formatter<string_view> {
     }
     return formatter<string_view>::format(name, ctx);
   }
+#undef STRINGIFY
 };

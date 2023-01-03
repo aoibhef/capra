@@ -9,10 +9,16 @@ set(CAPRA_INCLUDE_FILES ${CAPRA_INCLUDE_FILES}
         include/capra/core/msg_data.hpp
         include/capra/core/msg_def.hxx
 
+        include/capra/gfx/gl/buffer_base.hpp
+        include/capra/gfx/gl/framebuffer.hpp
+        include/capra/gfx/gl/shader.hpp
+        include/capra/gfx/gl/static_buffer.hpp
+        include/capra/gfx/gl/vertex_array.hpp
         include/capra/gfx/color.hpp
 
         include/capra/util/noise/perlin.hpp
         include/capra/util/averagers.hpp
+        include/capra/util/dear.hpp
         include/capra/util/enum_bitops.hpp
         include/capra/util/framecounter.hpp
         include/capra/util/log.hpp

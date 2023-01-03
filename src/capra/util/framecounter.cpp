@@ -7,6 +7,16 @@ FrameCounter::FrameCounter(double interval) {
   user_ticker_ = Ticker(interval);
 }
 
+void FrameCounter::reset() {
+  start_time_ = time_nsec();
+  timestamps_.clear();
+  dts_.clear();
+
+  user_ticker_.reset();
+  ticker_.reset();
+  averager_ = EMA(1.0);
+}
+
 std::uint64_t FrameCounter::update() {
   timestamps_.emplace_back(time_nsec());
   if (timestamps_.size() == 1)

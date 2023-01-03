@@ -9,6 +9,13 @@ Ticker::Ticker(double interval) : interval_(static_cast<std::uint64_t>(interval 
   last_ = start_;
 }
 
+void Ticker::reset() {
+  start_ = time_nsec();
+  last_ = start_;
+  dt_ = 0;
+  acc_ = 0;
+}
+
 std::uint64_t Ticker::tick() {
   auto now = time_nsec();
   dt_ = now - last_;

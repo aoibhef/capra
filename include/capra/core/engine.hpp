@@ -18,6 +18,8 @@ namespace capra {
 
 class Engine : public std::enable_shared_from_this<Engine> {
 public:
+  FrameCounter framecounter{1.0};
+
   Engine();
 
   template<class T, ModuleTag tag, typename... Args> requires std::derived_from<T, Module>
@@ -71,7 +73,7 @@ void Engine::run() {
 
   MsgBus::send_nowait<MsgType::Initialize>();
 
-  FrameCounter framecounter{1.0};
+  framecounter.reset();
   do {
     MsgBus::send_nowait<MsgType::Update>(framecounter.dt());
 
@@ -85,8 +87,7 @@ void Engine::run() {
 
     glfwPollEvents();
 
-    if (framecounter.update() > 0)
-      CAPRA_LOG_DEBUG("FPS: {:.2f}", framecounter.fps());
+    framecounter.update();
   } while (!received_shutdown_);
 }
 

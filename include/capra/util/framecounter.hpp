@@ -13,6 +13,8 @@ class FrameCounter {
 public:
   FrameCounter(double interval = 0.0);
 
+  void reset();
+
   std::uint64_t update();
 
   double fps() const;

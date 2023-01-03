@@ -8,6 +8,8 @@ class Ticker {
 public:
   Ticker(double interval = 0.0);
 
+  void reset();
+
   std::uint64_t tick();
 
   double dt_nsec();
