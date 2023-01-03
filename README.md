@@ -1,8 +1,14 @@
-<img src="data/logo/xlarge.png">
+<img src='data/logo/xlarge.png' title='Capra Logo' alt='Pink text with a black drop shadow that reads "capra" with an image of a goat jumping towards it on the left'>
 
-Experimental, event-based graphics engine
+## About
 
-### Credits
+Capra is an experimental, event-based graphics/game engine focused on ease of use. Inspiration drawn from libraries such as PyGame for Python, and LOVE2D for Lua. Currently, there is more support being given to low-res/pixel art style graphics and primitives, but ideally in the future any kind of graphics will be supported. 
+
+## Features
+
+TODO
+
+## Credits
 
 Goat in the logo and icon from this [tutorial](https://lifebe.com.au/artistic/pixel-art-tutorial-farmyard-goat/).
 
